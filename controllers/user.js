@@ -12,11 +12,9 @@ exports.signUp = (request, response, next) => {
     
     try{
         let result = functions.insert(request, response, next);
-        //console.log(result);
         response.status(201).json({message: 'ressource created !'});
     }catch(error){
-        console.log(error);
-        response.status(500).json({message: 'failed to create ressource'});
+        response.status(400).json({message: 'failed to create ressource'});
     }
     
 };
