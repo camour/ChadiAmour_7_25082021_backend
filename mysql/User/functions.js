@@ -2,7 +2,6 @@ let mysql = require('mysql2');
 let dataBase = require('../config');
 
 
-
 exports.insertNewUser = (request, response, next) =>{
     let insertQuery = 'INSERT INTO User(email, userName, password, subscribingDate) Values( ?, ?, ?, ?)';    
     let query = mysql.format(insertQuery, [request.body.email, 
