@@ -1,10 +1,18 @@
 let functions = require('../mysql/User/functions');
+const bcrypt = require('bcrypt');
 
 
 exports.signIn = (request, response, next) => {
     functions.checkUser(request, response, next)
     .then(result => {
-        response.status(201).json({message: 'signed in !', post: {...request.body}});
+        bcrypt.compare(request.body.password, result[0].password)
+        .then(valid => {
+
+            response.status(201).json({
+                userId: result[0].id,
+                userName: result[0].userName
+            });
+        });       
     })
     .catch(error => {
         console.log(error);
@@ -21,7 +29,6 @@ exports.signUp = (request, response, next) => {
         response.status(201).json({message: 'ressource created !'});
     })
     .catch(error => {   
-        //const message = error.no == 1062 ? 'user already existing'  
         response.status(400).json({message: 'failed to create ressource : try with another account'});
     });    
 };
