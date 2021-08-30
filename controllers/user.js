@@ -1,5 +1,6 @@
 let functions = require('../mysql/User/functions');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 exports.signIn = (request, response, next) => {
@@ -7,11 +8,13 @@ exports.signIn = (request, response, next) => {
     .then(result => {
         bcrypt.compare(request.body.password, result[0].password)
         .then(valid => {
-
-            response.status(201).json({
-                userId: result[0].id,
-                userName: result[0].userName
-            });
+                if(valid){
+                    response.status(200).json({
+                        userId: result[0].id,
+                        userName: result[0].userName,
+                        token: jwt.sign({userId: result[0].id}, 'RANDOM_SECRET_KEY', {expiresIn: '24h'}) 
+                });
+            }
         });       
     })
     .catch(error => {

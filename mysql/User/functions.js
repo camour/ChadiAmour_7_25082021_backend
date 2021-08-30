@@ -18,12 +18,13 @@ exports.insertNewUser = (request, response, next) =>{
 
 
 exports.checkUser = (request, response, next) => {
-    let selectQuery = 'SELECT id, userName, password FROM User WHERE userName = ? AND password = ?';
+    let selectQuery = 'SELECT id, userName, password FROM User WHERE userName = ?';
 
-    let query = mysql.format(selectQuery, [request.body.userName, request.body.password]);
+    let query = mysql.format(selectQuery, [request.body.userName]);
     
     return new Promise((resolve, reject) => {
         dataBase.query(query, (error, result) => {
+            
             error ? reject(error) : resolve(result);
         });
     });
