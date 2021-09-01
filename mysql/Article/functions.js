@@ -36,3 +36,13 @@ exports.updateArticle = (articleId, userId, articleSubject, articleContent) => {
         })
     });
 }
+
+exports.deleteArticle = (articleId, userId) => {
+    let deleteQuery = 'DELETE FROM Articles WHERE id = ? AND userId = ? ';
+    let query = mysql.format(deleteQuery, [articleId, userId]);
+    return new Promise((resolve, reject) => {
+        dataBase.query(query, (error, result) => {
+            resolve(result);
+        })
+    });
+}
