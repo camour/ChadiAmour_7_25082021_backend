@@ -11,7 +11,7 @@ exports.selectArticles = () => {
 };
 
 exports.selectComments = (articleId, commentsArray) => {
-        let selectQuery = 'SELECT  Comments.id AS commentId, LOWER(Comments.content) AS commentContent, Comments.publishingDate AS commentPublishingDate, User.userName AS commentUserName FROM Comments INNER JOIN User ON Comments.userId = User.id WHERE Comments.articleId = ' + articleId ;
+        let selectQuery = 'SELECT  Comments.id AS commentId, LOWER(Comments.content) AS commentContent, Comments.publishingDate AS commentPublishingDate, User.userName AS commentUserName FROM Comments INNER JOIN User ON Comments.userId = User.id WHERE Comments.articleId = ' + articleId + ' ORDER BY publishingDate DESC' ;
         return new Promise((resolve, reject) => {
             dataBase.query(selectQuery, (error, result) => {
                 if(!error){
@@ -19,6 +19,10 @@ exports.selectComments = (articleId, commentsArray) => {
                         commentsArray.push({...result[index]});
                     }                    
                     resolve(commentsArray);
+                }
+                else{
+                    console.log(error);
+                    reject(error);
                 }
             });
         }); 
