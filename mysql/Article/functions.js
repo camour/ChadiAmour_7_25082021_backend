@@ -58,3 +58,15 @@ exports.deleteComments = (articleId) => {
         })
     });
 };
+
+exports.insertNewArticle = (userId, newArticle) =>{
+    let insertQuery = 'INSERT INTO Articles(subject, content, publishingDate, userId) VALUES(?, ?, ?, ?)';
+    let query = mysql.format(insertQuery, [newArticle.articleSubject, newArticle.articleContent, newArticle.articlePublishingDate, userId]);
+    return new Promise((resolve, reject) => {
+        dataBase.query(query, (error, result) => {      
+            if(!error){
+                resolve(result);
+            };
+        });
+    });
+};

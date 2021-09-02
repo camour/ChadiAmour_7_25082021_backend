@@ -37,6 +37,17 @@ exports.deleteArticle = (request, response, next) => {
         response.status(200).json({message: 'ressource deleted ! '});
     })
     .catch(error => {
-        response.status(400).json({message: 'cannot find ressource'});
+        response.status(400).json({message: 'cannot find ressource !'});
     });
+};
+
+exports.createNewArticle = (request, response, next) => {
+    functions.insertNewArticle(request.body.userId, request.body.newArticleToAdd)
+    .then(result => {
+        console.log('article created !');
+        response.status(200).json({message: 'ressource created !', articleId: result.insertId});
+    })
+    .catch(error => {
+        response.status(400).json({message: 'cannot create ressource !'});
+    })
 };
