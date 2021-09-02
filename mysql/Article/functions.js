@@ -49,7 +49,7 @@ exports.deleteArticle = (articleId, userId) => {
     });
 };
 
-exports.deleteComments = (articleId) => {
+exports.deleteArticleComments = (articleId) => {
     let deleteQuery = 'DELETE FROM Comments WHERE articleId = ?';
     let query = mysql.format(deleteQuery, [articleId]);
     return new Promise((resolve, reject) => {

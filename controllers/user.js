@@ -10,8 +10,10 @@ exports.signIn = (request, response, next) => {
         .then(valid => {
                 if(valid){
                     response.status(200).json({
-                        userId: result[0].id,
-                        userName: result[0].userName,
+                        user: {
+                            userId: result[0].id,
+                            userName: result[0].userName
+                        },
                         token: jwt.sign({userId: result[0].id}, 'RANDOM_SECRET_KEY', {expiresIn: '24h'}) 
                 });
             }

@@ -30,7 +30,7 @@ exports.deleteArticle = (request, response, next) => {
     functions.deleteArticle(request.params.articleId, request.body.userId)
     .then(result => {
         console.log('article deleted ! ');
-        return functions.deleteComments(request.params.articleId);
+        return functions.deleteArticleComments(request.params.articleId);
     })
     .then(result => {
         console.log('comments deleted ! ');
