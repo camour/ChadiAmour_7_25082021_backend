@@ -2,7 +2,7 @@ let mysql = require('mysql2');
 let dataBase = require('../config');
 
 exports.selectArticles = () => {
-    let selectQuery = 'SELECT Articles.id AS articleId, Articles.subject AS articleSubject, LOWER(Articles.content) AS articleContent, Articles.publishingDate AS articlePublishingDate, User.userName AS articleUserName FROM Articles INNER JOIN User ON Articles.userId = User.id ORDER BY Articles.publishingDate DESC';
+    let selectQuery = 'SELECT Articles.id AS articleId, UPPER(Articles.subject) AS articleSubject, LOWER(Articles.content) AS articleContent, Articles.publishingDate AS articlePublishingDate, User.userName AS articleUserName FROM Articles INNER JOIN User ON Articles.userId = User.id ORDER BY Articles.publishingDate DESC';
     return new Promise((resolve, reject) => {
         dataBase.query(selectQuery, (error, result) => {
             error ? reject(error) : resolve(result);

@@ -16,7 +16,11 @@ exports.getAllArticlesAndComments = (request, response, next) =>{
 };
 
 exports.modifyArticle = (request, response, next) => {    
-    functions.updateArticle(request.params.articleId, request.body.userId, request.body.articleSubject, request.body.articleContent)
+    functions.updateArticle(request.params.articleId, 
+        request.body.userId, 
+        request.body.article.articleSubject, 
+        request.body.article.articleContent
+        )
     .then(result => {
         console.log('article modified !');
         response.status(200).json({message: 'ressource modified !'});
