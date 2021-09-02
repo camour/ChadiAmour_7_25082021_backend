@@ -21,7 +21,6 @@ exports.selectComments = (articleId, commentsArray) => {
                     resolve(commentsArray);
                 }
                 else{
-                    console.log(error);
                     reject(error);
                 }
             });
