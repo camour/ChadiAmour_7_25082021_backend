@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const userRoutes = require('./routes/user');
 const articleRoutes = require('./routes/article');
+const commentRoutes = require('./routes/comment');
 
 
 // set CORS mecanism
@@ -16,6 +17,6 @@ app.use((request, response, next) => {
 app.use(bodyParser.json());
 app.use('/api/auth', userRoutes);
 app.use('/api/articles', articleRoutes);
-
+app.use('/api/comments', commentRoutes);
 
 module.exports = app;

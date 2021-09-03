@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-
+let mysql = require('mysql2');
+let dataBase = require('../mysql/config');
 
 module.exports = (request, response, next) => {
     try{
@@ -8,11 +9,10 @@ module.exports = (request, response, next) => {
         //also contained in the token
         const decodedToken = jwt.verify(token, 'RANDOM_SECRET_KEY');
         if(request.body.userId && (request.body.userId != decodedToken.userId)){
-            throw 'Invalid user';
+            throw 'Invalid user !';
         }
-        next();
+        next();                  
     }catch(error){
         response.status(401).json({message: error | 'Unauthentificated request !'});
     }
-
 };

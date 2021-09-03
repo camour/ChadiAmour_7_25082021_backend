@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const articlesController = require('../controllers/article');
+const articleController = require('../controllers/article');
 const auth = require('../middlewares/auth');
 
-router.get('/', auth, articlesController.getAllArticlesAndComments);
-router.put('/:articleId', auth, articlesController.modifyArticle);
-router.delete('/:articleId', auth, articlesController.deleteArticle);
-router.post('/', auth, articlesController.createNewArticle);
+router.get('/', auth, articleController.getAllArticlesAndComments);
+router.put('/:articleId', auth, articleController.modifyArticle);
+router.delete('/:articleId', auth, articleController.deleteArticle);
+router.post('/', auth, articleController.createNewArticle);
 
 module.exports = router;
