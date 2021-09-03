@@ -3,7 +3,7 @@ let dataBase = require('../config');
 
 exports.updateComment = (commentId, commentUserId, comment) => {
     let updateQuery = 'UPDATE Comments SET content = ? WHERE id = ? AND articleId = ? AND userId = ?';
-    let query = mysql.format(query, [comment.commentContent, commentId, comment.commentArticleId, commentUserId]);
+    let query = mysql.format(updateQuery, [comment.commentContent, commentId, comment.commentArticleId, commentUserId]);
     return new Promise((resolve, reject) => {
         dataBase.query(query, (error, result) => {
             if(!error){
