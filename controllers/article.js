@@ -15,7 +15,6 @@ exports.getAllArticlesAndComments = (request, response, next) =>{
 };
 
 exports.modifyArticle = (request, response, next) => { 
-    console.log('enters modify article route');   
     functions.updateArticle(request.params.articleId, 
         request.body.userId, 
         request.body.article.articleSubject, 
