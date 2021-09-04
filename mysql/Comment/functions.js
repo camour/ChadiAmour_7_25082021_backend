@@ -14,7 +14,7 @@ exports.updateComment = (commentId, commentUserId, comment) => {
 };
 
 exports.deleteComment = (commentId, commentUserId, comment) => {
-    let deleteQuery = 'DELETE FROM Comments WHERE id = ? AND articleId = AND userId = ';
+    let deleteQuery = 'DELETE FROM Comments WHERE id = ? AND articleId = ? AND userId = ?';
     let query = mysql.format(deleteQuery, [commentId, comment.commentArticleId, commentUserId]);
     return new Promise((resolve, reject) => {
         dataBase.query(query, (error, result) => {
