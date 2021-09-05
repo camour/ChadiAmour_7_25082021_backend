@@ -43,3 +43,16 @@ exports.signUp = (request, response, next) => {
         response.status(400).json({message: 'failed to create ressource : try with another account'});
     });
 };
+
+exports.user = (request, response, next) => {
+    functions.selectUser(request.params.userId)
+    .then(result => {
+        response.status(200).json({user: {
+            email: result[0].email,
+            subscribingDate: result[0].subscribingDate
+        }});
+    })
+    .catch(error => {
+        response.status(400).json(error);
+    })
+};

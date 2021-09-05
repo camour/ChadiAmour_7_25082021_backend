@@ -29,3 +29,14 @@ exports.checkUser = (request, response, next) => {
         });
     });
 };
+
+exports.selectUser = (userId) => {
+    let selectQuery = 'SELECT email, subscribingDate FROM User WHERE id = ?';
+    let query = mysql.format(selectQuery, [userId]);
+
+    return new Promise((resolve, reject) => {
+        dataBase.query(query, (error, result) => {
+            error ? reject(error) : resolve(result);
+        });
+    });
+};
