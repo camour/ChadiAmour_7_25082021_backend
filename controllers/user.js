@@ -12,7 +12,8 @@ exports.signIn = (request, response, next) => {
                     response.status(200).json({
                         user: {
                             userId: result[0].id,
-                            userName: result[0].userName
+                            userName: result[0].userName,
+                            image: result[0].image
                         },
                         token: jwt.sign({userId: result[0].id}, 'RANDOM_SECRET_KEY', {expiresIn: '24h'}) 
                     });                

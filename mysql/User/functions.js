@@ -18,7 +18,7 @@ exports.insertNewUser = (user, file) =>{
 
 
 exports.checkUser = (request, response, next) => {
-    let selectQuery = 'SELECT id, userName, password FROM User WHERE userName = ?';
+    let selectQuery = 'SELECT id, userName, image, password FROM User WHERE userName = ?';
 
     let query = mysql.format(selectQuery, [request.body.userName]);
     

@@ -4,6 +4,7 @@ const app = express();
 const userRoutes = require('./routes/user');
 const articleRoutes = require('./routes/article');
 const commentRoutes = require('./routes/comment');
+const path = require('path');
 
 
 // set CORS mecanism
@@ -15,6 +16,7 @@ app.use((request, response, next) => {
   });
 
 app.use(bodyParser.json());
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/comments', commentRoutes);
