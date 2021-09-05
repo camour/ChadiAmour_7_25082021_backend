@@ -15,8 +15,12 @@ exports.signIn = (request, response, next) => {
                             userName: result[0].userName
                         },
                         token: jwt.sign({userId: result[0].id}, 'RANDOM_SECRET_KEY', {expiresIn: '24h'}) 
-                });
-            }
+                    });                
+                }
+                response.status(401).json({message: 'Invalid user or password'});
+        })
+        .catch(error => {
+            response.status(500).json({error});
         });       
     })
     .catch(error => {
@@ -28,12 +32,12 @@ exports.signIn = (request, response, next) => {
 };
 
 exports.signUp = (request, response, next) => {
-    
-    functions.insertNewUser(request, response, next)
+    console.log(request.file);
+    /*functions.insertNewUser(request, response, next)
     .then(result => {            
         response.status(201).json({message: 'ressource created !'});
     })
     .catch(error => {   
         response.status(400).json({message: 'failed to create ressource : try with another account'});
-    });    
+    });*/ 
 };
