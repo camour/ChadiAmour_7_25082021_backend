@@ -3,11 +3,11 @@ let dataBase = require('../config');
 const bcrypt = require('bcrypt');
 
 
-exports.insertNewUser = (request, response, next) =>{
-    let insertQuery = 'INSERT INTO User(email, userName, password, subscribingDate) Values( ?, ?, ?, ?)'; 
-    return bcrypt.hash(request.body.password, 10)
+exports.insertNewUser = (user, file) =>{
+    let insertQuery = 'INSERT INTO User(email, userName, password, subscribingDate, image) Values( ?, ?, ?, ?, ?)'; 
+    return bcrypt.hash(user.password, 10)
     .then(passwordHash => {
-        let query = mysql.format(insertQuery, [request.body.email, request.body.userName, passwordHash, new Date().toISOString().slice(0, 19).replace('T', ' ')]);
+        let query = mysql.format(insertQuery, [user.email, user.userName, passwordHash, new Date().toISOString().slice(0, 19).replace('T', ' '), file]);
         return new Promise((resolve, reject) => {
             dataBase.query(query, (error, result) => {
                 error? reject(error) : resolve(result);              
