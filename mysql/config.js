@@ -1,16 +1,11 @@
-/*var Sequelize = require('sequelize');
-
-var sequelize = new Sequelize('eInteract', 'camour100', '-789hj:tfq&',{dialect: "mysql", host:"localhost", logging: true});
-
-var exports = module.exports = {};
-exports.sequelize = sequelize;*/
+require('dotenv').config();
 
 let mysql = require('mysql2');
 let dataBase = mysql.createConnection({
-    'host': 'localhost',
-    'user': 'camour100',
-    'password': '-789hj:tfq&',
-    'database': 'eInteract'    
+    'host': process.env.DB_HOST,
+    'user': process.env.DB_USER,
+    'password': process.env.DB_PASSWORD,
+    'database': process.env.DB_NAME  
 });
 
 dataBase.connect(function(err){

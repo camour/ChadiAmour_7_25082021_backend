@@ -2,7 +2,8 @@ let functions = require('../mysql/Article/functions');
 
 exports.getAllArticlesAndComments = (request, response, next) =>{    
     functions.selectArticles()
-    .then(async(articles) => {        
+    .then(async(articles) => {  
+              
         for(let article of articles){
             article.comments = new Array();
             await functions.selectComments(article.articleId, article.comments);            

@@ -31,7 +31,7 @@ exports.checkUser = (request, response, next) => {
 };
 
 exports.selectUser = (userId) => {
-    let selectQuery = 'SELECT email, subscribingDate, COUNT(Articles.id) AS postsNumber FROM User JOIN Articles ON User.id = Articles.userId WHERE User.id = ?';
+    let selectQuery = 'SELECT email, subscribingDate, COUNT(Articles.id) AS postsNumber FROM User LEFT JOIN Articles ON User.id = Articles.userId WHERE User.id = ?';
     let query = mysql.format(selectQuery, [userId]);
 
     return new Promise((resolve, reject) => {

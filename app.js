@@ -9,7 +9,7 @@ const helmet = require('helmet');
 
 
 //sets HSTS (Http Strict Transport Security) attribute : 
-// it prevents API from XSS, cookies from being accessed by any scripts and finally sets https connexions
+// it prevents website from XSS, cookies from being accessed by any scripts
 app.use(helmet());
 
 // set CORS mecanism
