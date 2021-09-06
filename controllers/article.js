@@ -21,7 +21,6 @@ exports.modifyArticle = (request, response, next) => {
         request.body.article.articleContent
         )
     .then(result => {
-        console.log('article modified !');
         response.status(200).json({message: 'ressource modified !'});
     })
     .catch(error => {
@@ -32,11 +31,9 @@ exports.modifyArticle = (request, response, next) => {
 exports.deleteArticle = (request, response, next) => {
     functions.deleteArticle(request.params.articleId, request.body.userId)
     .then(result => {
-        console.log('article deleted ! ');
         return functions.deleteArticleComments(request.params.articleId);
     })
     .then(result => {
-        console.log('comments deleted ! ');
         response.status(200).json({message: 'ressource deleted ! '});
     })
     .catch(error => {
@@ -47,7 +44,6 @@ exports.deleteArticle = (request, response, next) => {
 exports.createNewArticle = (request, response, next) => {
     functions.insertNewArticle(request.body.userId, request.body.newArticleToAdd)
     .then(result => {
-        console.log('article created !');
         response.status(200).json({message: 'ressource created !', articleId: result.insertId});
     })
     .catch(error => {

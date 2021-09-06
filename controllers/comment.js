@@ -4,7 +4,6 @@ let functions = require('../mysql/Comment/functions');
 exports.modifyComment = (request, response, next) => {
     functions.updateComment(request.params.commentId, request.body.userId, request.body.comment)
     .then(result => {
-        console.log('modify comment');
         response.status(200).json({message: 'ressource modified !'});
     })
     .catch();
@@ -13,7 +12,6 @@ exports.modifyComment = (request, response, next) => {
 exports.deleteComment = (request, response, next) => {
     functions.deleteComment(request.params.commentId, request.body.userId, request.body.comment)
     .then(result => {
-        console.log('delete comment');
         response.status(200).json({message: 'ressource deleted !'});
     })
     .catch();

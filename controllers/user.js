@@ -26,7 +26,6 @@ exports.signIn = (request, response, next) => {
         });       
     })
     .catch(error => {
-        console.log(error);
         response.status(401).json({message: 'invalid user or password'});
     });
     
@@ -49,7 +48,8 @@ exports.user = (request, response, next) => {
     .then(result => {
         response.status(200).json({user: {
             email: result[0].email,
-            subscribingDate: result[0].subscribingDate
+            subscribingDate: result[0].subscribingDate,
+            postsNumber: result[0].postsNumber            
         }});
     })
     .catch(error => {
