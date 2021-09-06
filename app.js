@@ -5,7 +5,12 @@ const userRoutes = require('./routes/user');
 const articleRoutes = require('./routes/article');
 const commentRoutes = require('./routes/comment');
 const path = require('path');
+const helmet = require('helmet');
 
+
+//sets HSTS (Http Strict Transport Security) attribute : 
+// it prevents API from XSS, cookies from being accessed by any scripts and finally sets https connexions
+app.use(helmet());
 
 // set CORS mecanism
 app.use((request, response, next) => {
