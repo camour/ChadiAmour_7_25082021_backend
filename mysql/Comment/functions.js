@@ -9,6 +9,9 @@ exports.updateComment = (commentId, commentUserId, comment) => {
             if(!error){
                 resolve(result);
             }
+            else{
+                reject(error);
+            }
         });
     });
 };
@@ -20,6 +23,9 @@ exports.deleteComment = (commentId, commentUserId, comment) => {
         dataBase.query(query, (error, result) => {
             if(!error){
                 resolve(result);
+            }
+            else{
+                reject(error);
             }
         })
     });
@@ -33,6 +39,8 @@ exports.insertNewComment = (commentArticleId, commentUserId, newComment) => {
         dataBase.query(query, (error, result) => {
             if(!error){
                 resolve(result);
+            }else{
+                reject(error);
             }
         });
     });

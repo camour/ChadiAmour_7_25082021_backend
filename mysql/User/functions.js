@@ -40,3 +40,18 @@ exports.selectUser = (userId) => {
         });
     });
 };
+
+exports.deleteUser = (userId) => {
+    let deleteQuery = 'DELETE FROM User WHERE id = ?';
+    let query = mysql.format(deleteQuery, [userId]);
+
+    return new Promise((resolve, reject) => {
+        dataBase.query(query, (error, result) => {
+            if(!error){
+                resolve(result);
+            }else{
+                reject(error);
+            }
+        });
+    });
+};
