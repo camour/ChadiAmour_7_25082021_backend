@@ -8,8 +8,11 @@ const utf8 = require('utf8');
 exports.signIn = (request, response, next) => {
     functions.checkUser(request, response, next)
     .then(result => {
+        // We use bcrypt to compare password submit by user and the password in database
         bcrypt.compare(request.body.password, result[0].password)
         .then(valid => {
+                //if comparison is ok, we send create a token that we send to the client and some
+                // additionnal user's informations
                 if(valid){
                     response.status(200).json({
                         user: {
@@ -20,6 +23,7 @@ exports.signIn = (request, response, next) => {
                         token: jwt.sign({userId: result[0].id}, process.env.TOKEN_SECRET_KEY, {expiresIn: '24h'}) 
                     });                
                 }else{
+                    // we dont give a clear response in case of the client is a hacker
                     response.status(401).json({message: 'Invalid user or password'});
                 }
         })
@@ -28,6 +32,7 @@ exports.signIn = (request, response, next) => {
         });       
     })
     .catch(error => {
+         // we dont give a clear response in case of the client is a hacker
         response.status(401).json({message: 'invalid user or password'});
     });
     

@@ -20,7 +20,9 @@ app.use((request, response, next) => {
     next();
   });
 
+// transforms JSON into JS object that we can use
 app.use(bodyParser.json());
+
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/articles', articleRoutes);
