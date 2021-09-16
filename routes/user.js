@@ -6,7 +6,7 @@ const auth = require('../middlewares/auth');
 const XSS = require('../middlewares/xss');
 
 router.post('/signIn', XSS, userController.signIn);
-router.post('/signUp', XSS, multer, userController.signUp);
+router.post('/signUp', multer, XSS, userController.signUp);
 router.get('/user/:userId', auth, XSS, userController.user);
 router.delete('/user/:userId', auth, XSS, userController.deleteUser);
 
