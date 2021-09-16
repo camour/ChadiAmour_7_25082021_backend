@@ -2,10 +2,10 @@
 
 const checkXSS = (object) => {
     for(let field of Object.keys(object)){
-        if(typeof object[field] === 'Object'){
+        if((typeof object[field]) === 'object'){
             checkXSS(object[field]);
         }
-        else if(typeof object[field] === 'string'){
+        else if((typeof object[field]) === 'string'){
             object[field] = object[field].replace(/<\/?[^>]+(>|$)/g, "");
         }       
     }
