@@ -1,17 +1,24 @@
 //removes '<', '>' tags to prevent app from XSS attacks
-module.exports = (request, response, next) => {
-    let ok = true;
-    let input = '';
-    for(let field of Object.keys(request.body)){
-        request.body[field] = request.body[field].replace(/<\/?[^>]+(>|$)/g, "");
-        if((request.body[field]) === ''){
-            ok = false;
-            input = field;
+
+const checkXSS = (object) => {
+    for(let field of Object.keys(object)){
+        if(typeof object[field] === 'Object'){
+            checkXSS(object[field]);
         }
+        else if(typeof object[field] === 'string'){
+            object[field] = object[field].replace(/<\/?[^>]+(>|$)/g, "");
+        }       
     }
-    if(!ok){
-        response.status(400).json({message: 'invalid ' + input});
-    }else{
-        next();
-    }    
 }
+
+module.exports = (request, response, next) => {
+    
+    if(request.body){
+        checkXSS(request.body);
+    }
+    if(request.params){
+        checkXSS(request.params);
+    }
+    next();  
+}
+
