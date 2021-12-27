@@ -1,5 +1,5 @@
 <<<<<<< HEAD
 informations
 =======
-some information to display
+some information to display on tv
 >>>>>>> 5335eee7908865d46eca1e0889d630a1b290a574
